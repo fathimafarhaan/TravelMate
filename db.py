@@ -39,5 +39,9 @@ def run_query_one(query, params=()):
 def run_query_no_output(query, params=()):
     "function for running a query that does not return any output"
     with get_connection() as conn:
-        conn.execute(query, params)
+        cursor = conn.execute(query, params)
         conn.commit()
+        return {
+            "lastrowid": cursor.lastrowid,
+            "rowcount": cursor.rowcount
+        }

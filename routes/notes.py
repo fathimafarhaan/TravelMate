@@ -9,7 +9,7 @@ notes_bp = Blueprint("planning_notes", __name__)
 def create_note(trip_id):
     "function for creating a new note for a specific trip"
     data = request.get_json()
-    new_id = db.run_query_no_output(
+    result = db.run_query_no_output(
         """INSERT INTO planning_notes 
         (
             trip_id,
@@ -19,7 +19,12 @@ def create_note(trip_id):
          data["note_text"]
         )
     )
-    return jsonify({"id": new_id}), 201
+    return jsonify(
+    {
+        "id": result["lastrowid"],
+        "message": "Note created successfully",
+    }
+), 201
 
 
 @notes_bp.route("/trips/<int:trip_id>/planning_notes", methods=["GET"])
@@ -32,7 +37,7 @@ def get_notes(trip_id):
 def update_note(note_id):
     "function for updating a note by id"
     data = request.get_json()
-    rows_updated = db.run_query_no_output(
+    result = db.run_query_no_output(
         """UPDATE planning_notes SET 
             note_text=?
         WHERE id=?""",
@@ -40,15 +45,16 @@ def update_note(note_id):
          note_id
         )
     )
-    if rows_updated == 0:
-        return jsonify({"error": "Note not found"}), 404
-    return jsonify({"message": "Note updated"}), 200
+    if result["rowcount"] == 0:
+        return jsonify({"error":"Note not found"}),404
+
+    return jsonify({"message":"Note updated successfully"}),200
 
 
 @notes_bp.route("/planning_notes/<int:note_id>", methods=["DELETE"])
 def delete_note(note_id):
     "function for deleting a note by id"
-    rows_deleted = db.run_query_no_output("DELETE FROM planning_notes WHERE id=?", (note_id,))
-    if rows_deleted == 0:
+    result = db.run_query_no_output("DELETE FROM planning_notes WHERE id=?", (note_id,))
+    if result["rowcount"] == 0:
         return jsonify({"error": "Note not found"}), 404
-    return jsonify({"message": "Note deleted"}), 200
+    return jsonify({"message": "Note deleted successfully"}), 200

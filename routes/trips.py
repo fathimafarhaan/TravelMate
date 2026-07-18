@@ -10,7 +10,7 @@ trips_bp = Blueprint("trips", __name__)
 def create_trips():
     "function for creating a new trip"
     data = request.get_json()
-    new_id = db.run_query_no_output(
+    result = db.run_query_no_output(
         """INSERT INTO trips 
         (
             destination,
@@ -31,7 +31,12 @@ def create_trips():
             data.get("experience_notes", None),
         ),
     )
-    return jsonify({"id": new_id}), 201
+    return jsonify(
+    {
+        "id": result["lastrowid"],
+        "message": "Trip created successfully",
+    }
+), 201
 
 
 @trips_bp.route("/trips", methods=["GET"])
@@ -53,7 +58,7 @@ def get_trip(trip_id):
 def update_trip(trip_id):
     "function for updating a trip by id"
     data = request.get_json()
-    rows_updated = db.run_query_no_output(
+    result = db.run_query_no_output(
         """UPDATE trips SET 
             destination=?, 
             country=?, 
@@ -74,15 +79,16 @@ def update_trip(trip_id):
             trip_id,
         ),
     )
-    if rows_updated == 0:
-        return jsonify({"error": "Trip not found"}), 404
-    return jsonify({"message": "Trip updated"}), 200
+    if result["rowcount"] == 0:
+        return jsonify({"error":"Trip not found"}),404
+
+    return jsonify({"message":"Trip updated successfully"}),200
 
 
 @trips_bp.route("/trips/<int:trip_id>", methods=["DELETE"])
 def delete_trip(trip_id):
     "function for deleting a trip by id"
-    rows_deleted = db.run_query_no_output("DELETE FROM trips WHERE id=?", (trip_id,))
-    if rows_deleted == 0:
+    result = db.run_query_no_output("DELETE FROM trips WHERE id=?", (trip_id,))
+    if result["rowcount"] == 0:
         return jsonify({"error": "Trip not found"}), 404
-    return jsonify({"message": "Trip deleted"}), 200
+    return jsonify({"message": "Trip deleted successfully"}), 200
