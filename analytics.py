@@ -15,27 +15,23 @@ def get_dashboard_data():
 
     analytics = {}
 
-    
-
     analytics["total_trips"] = len(trips_df)
 
     if not trips_df.empty:
 
-        analytics["completed_trips"] = int(
-            (trips_df["status"] == "Completed").sum()
-        )
+        analytics["completed_trips"] = int((trips_df["status"] == "Completed").sum())
 
-        analytics["planned_trips"] = int(
-            (trips_df["status"] == "Planned").sum()
-        )
+        analytics["planned_trips"] = int((trips_df["status"] == "Planned").sum())
 
         analytics["average_budget"] = round(
             float(trips_df["estimated_budget"].mean()), 2
         )
 
-        analytics["average_rating"] = round(
-            float(trips_df["rating"].dropna().mean()), 2
-        ) if trips_df["rating"].notna().any() else None
+        analytics["average_rating"] = (
+            round(float(trips_df["rating"].dropna().mean()), 2)
+            if trips_df["rating"].notna().any()
+            else None
+        )
 
         analytics["travel_type_summary"] = (
             trips_df.groupby("travel_type")
@@ -60,13 +56,9 @@ def get_dashboard_data():
         analytics["travel_type_summary"] = []
         analytics["country_summary"] = []
 
-    
-
     if not expenses_df.empty:
 
-        analytics["total_expense"] = round(
-            float(expenses_df["amount"].sum()), 2
-        )
+        analytics["total_expense"] = round(float(expenses_df["amount"].sum()), 2)
 
         analytics["expense_summary"] = (
             expenses_df.groupby("category")["amount"]
