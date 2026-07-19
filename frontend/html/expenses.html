@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>TravelMate - Expenses</title>
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/expenses.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+
+        <i class="fa-solid fa-earth-americas"></i>
+
+        <span>TravelMate</span>
+
+    </div>
+
+    <nav>
+
+        <a href="../index.html">Dashboard</a>
+        <a href="trips.html">Trips</a>
+        <a href="places.html">Places</a>
+        <a href="notes.html">Notes</a>
+        <a href="expenses.html" class="active">Expenses</a>
+
+    </nav>
+
+</header>
+
+<div class="container">
+
+    <div class="page-title">
+
+        <h1>Travel Expenses</h1>
+
+        <p>Track every expense for each trip.</p>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Add Expense</h2>
+
+        <form>
+
+            <div class="grid">
+
+                <select>
+
+                    <option selected disabled>
+                        Select Trip
+                    </option>
+
+                </select>
+
+                <select>
+
+                    <option>Flight</option>
+                    <option>Hotel</option>
+                    <option>Food</option>
+                    <option>Shopping</option>
+                    <option>Transport</option>
+                    <option>Other</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    placeholder="Amount">
+
+                <input
+                    type="date">
+
+            </div>
+
+            <textarea
+                rows="4"
+                placeholder="Description"
+            ></textarea>
+
+            <button>
+
+                <i class="fa-solid fa-wallet"></i>
+
+                Add Expense
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Expense List</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Trip</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script src="../js/expenses.js"></script>
+
+</body>
+
+</html>
