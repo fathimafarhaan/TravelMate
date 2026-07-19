@@ -1,124 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>TravelMate - Places</title>
 
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="../css/places.css">
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../css/places.css" />
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
 
-</head>
-
-<body>
-
-<header>
-
-    <div class="logo">
+  <body>
+    <header>
+      <div class="logo">
         <i class="fa-solid fa-earth-americas"></i>
         <span>TravelMate</span>
-    </div>
+      </div>
 
-    <nav>
-
+      <nav>
         <a href="../index.html">Dashboard</a>
         <a href="trips.html">Trips</a>
         <a href="places.html" class="active">Places</a>
         <a href="notes.html">Notes</a>
         <a href="expenses.html">Expenses</a>
+      </nav>
+    </header>
 
-    </nav>
-
-</header>
-
-<div class="container">
-
-    <div class="page-title">
-
+    <div class="container">
+      <div class="page-title">
         <h1>Places To Visit</h1>
 
-<p>
-Add the places you plan to visit during each trip.
-</p>
+        <p>Add the places you plan to visit during each trip.</p>
+      </div>
 
-    </div>
-
-    <div class="card">
-
+      <div class="card">
         <h2>Add Place</h2>
 
-        <form>
+        <form id="placeForm">
+          <div class="grid">
+            <select id="tripSelect">
+              <option selected disabled>Select Trip</option>
+            </select>
 
-    <div class="grid">
+            <input
+              type="text"
+              id="placeName"
+              placeholder="Place Name"
+              required
+            />
 
-        <select id="tripSelect">
-    <option selected disabled>Select Trip</option>
-</select>
+            <select id="visited">
+              <option value="0">Not Visited</option>
+              <option value="1">Visited</option>
+            </select>
+          </div>
 
-        <input
-            type="text"
-            placeholder="Place Name"
-        >
+          <button type="submit">
+            <i class="fa-solid fa-plus"></i>
 
-        <select>
+            Add Place
+          </button>
+        </form>
+      </div>
 
-            <option>Not Visited</option>
-
-            <option>Visited</option>
-
-        </select>
-
-    </div>
-
-    <button>
-
-        <i class="fa-solid fa-plus"></i>
-
-        Add Place
-
-    </button>
-
-</form>
-
-    </div>
-
-    <div class="card">
-
+      <div class="card">
         <h2>Places List</h2>
 
         <table>
 
-            <thead>
+    <thead>
 
-                <tr>
+        <tr>
 
-                    <th>Trip ID</th>
-                    <th>Place</th>
-                    <th>Status</th>
-                    <th>Actions</th>
+            <th>Trip</th>
+            <th>Place</th>
+            <th>Status</th>
+            <th>Actions</th>
 
-                </tr>
+        </tr>
 
-            </thead>
+    </thead>
 
-            <tbody>
+    <tbody id="placesTable">
 
-            </tbody>
+    </tbody>
 
-        </table>
-
+</table>
+      </div>
     </div>
 
-</div>
-
-<script src="../js/places.js"></script>
-
-</body>
-
+    <script src="../js/places.js"></script>
+  </body>
 </html>
