@@ -55,52 +55,59 @@
 
         <h2>Add Expense</h2>
 
-        <form>
+        <form id="expenseForm">
 
-            <div class="grid">
+    <div class="grid">
 
-                <select>
+        <select id="tripSelect">
 
-                    <option selected disabled>
-                        Select Trip
-                    </option>
+            <option selected disabled>
+                Select Trip
+            </option>
 
-                </select>
+        </select>
 
-                <select>
+        <select id="category">
 
-                    <option>Flight</option>
-                    <option>Hotel</option>
-                    <option>Food</option>
-                    <option>Shopping</option>
-                    <option>Transport</option>
-                    <option>Other</option>
+            <option>Flight</option>
+            <option>Hotel</option>
+            <option>Food</option>
+            <option>Shopping</option>
+            <option>Transport</option>
+            <option>Other</option>
 
-                </select>
+        </select>
 
-                <input
-                    type="number"
-                    placeholder="Amount">
+        <input
+            type="number"
+            id="amount"
+            placeholder="Amount"
+            required
+        >
 
-                <input
-                    type="date">
+        <input
+            type="date"
+            id="expenseDate"
+            required
+        >
 
-            </div>
+    </div>
 
-            <textarea
-                rows="4"
-                placeholder="Description"
-            ></textarea>
+    <textarea
+        id="description"
+        rows="4"
+        placeholder="Description"
+    ></textarea>
 
-            <button>
+    <button type="submit">
 
-                <i class="fa-solid fa-wallet"></i>
+        <i class="fa-solid fa-wallet"></i>
 
-                Add Expense
+        Add Expense
 
-            </button>
+    </button>
 
-        </form>
+</form>
 
     </div>
 
@@ -124,9 +131,9 @@
 
             </thead>
 
-            <tbody>
+            <tbody id="expensesTable">
 
-            </tbody>
+</tbody>
 
         </table>
 
