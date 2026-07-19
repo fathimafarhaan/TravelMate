@@ -3,61 +3,82 @@ const API = "http://127.0.0.1:5000";
 const form = document.getElementById("tripForm");
 const table = document.getElementById("tripTable");
 
+const submitButton = form.querySelector("button");
+
+let editingTripId = null;
+
 /* ---------------- Load Trips ---------------- */
 
 async function loadTrips() {
 
-    const response = await fetch(`${API}/trips`);
+    try {
 
-    const trips = await response.json();
+        const response = await fetch(`${API}/trips`);
 
-    table.innerHTML = "";
+        if (!response.ok) {
+            throw new Error("Unable to load trips");
+        }
 
-    trips.forEach((trip) => {
+        const trips = await response.json();
 
-        table.innerHTML += `
+        table.innerHTML = "";
 
-        <tr>
+        trips.forEach((trip) => {
 
-            <td>${trip.destination}</td>
+            table.innerHTML += `
 
-            <td>${trip.country}</td>
+            <tr>
 
-            <td>${trip.travel_type}</td>
+                <td>${trip.destination}</td>
 
-            <td>₹${trip.estimated_budget}</td>
+                <td>${trip.country}</td>
 
-            <td>${trip.status}</td>
+                <td>${trip.travel_type}</td>
 
-            <td>${trip.rating ?? "-"}</td>
+                <td>₹${trip.estimated_budget}</td>
 
-            <td>
+                <td>${trip.status}</td>
 
-                <button
-                    class="action-btn edit-btn"
-                    onclick="editTrip(${trip.id})"
-                >
-                    Edit
-                </button>
+                <td>${trip.rating ?? "-"}</td>
 
-                <button
-                    class="action-btn delete-btn"
-                    onclick="deleteTrip(${trip.id})"
-                >
-                    Delete
-                </button>
+                <td>
 
-            </td>
+                    <button
+                        type="button"
+                        class="action-btn edit-btn"
+                        onclick="editTrip(${trip.id})"
+                    >
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
 
-        </tr>
+                    <button
+                        type="button"
+                        class="action-btn delete-btn"
+                        onclick="deleteTrip(${trip.id})"
+                    >
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
 
-        `;
+                </td>
 
-    });
+            </tr>
+
+            `;
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+        alert("Unable to load trips.");
+
+    }
 
 }
 
-/* ---------------- Create Trip ---------------- */
+/* ---------------- Create / Update Trip ---------------- */
 
 form.addEventListener("submit", async (e) => {
 
@@ -81,128 +102,185 @@ form.addEventListener("submit", async (e) => {
             document.getElementById("status").value,
 
         rating:
-            Number(document.getElementById("rating").value) || null,
+            document.getElementById("rating").value
+                ? Number(document.getElementById("rating").value)
+                : null,
 
         experience_notes:
-            document.getElementById("notes").value
+            document.getElementById("notes").value || null
 
     };
 
-    await fetch(`${API}/trips`, {
+    let response;
 
-        method: "POST",
+    try {
 
-        headers: {
+        if (editingTripId === null) {
 
-            "Content-Type": "application/json"
+            response = await fetch(`${API}/trips`, {
 
-        },
+                method: "POST",
 
-        body: JSON.stringify(body)
+                headers: {
 
-    });
+                    "Content-Type": "application/json"
 
-    form.reset();
+                },
 
-    loadTrips();
+                body: JSON.stringify(body)
+
+            });
+
+        }
+
+        else {
+
+            response = await fetch(`${API}/trips/${editingTripId}`, {
+
+                method: "PUT",
+
+                headers: {
+
+                    "Content-Type": "application/json"
+
+                },
+
+                body: JSON.stringify(body)
+
+            });
+
+        }
+
+        if (!response.ok) {
+
+    throw new Error("Save failed");
+
+}
+
+if (editingTripId === null) {
+
+    alert("Trip created successfully.");
+
+}
+
+else {
+
+    alert("Trip updated successfully.");
+
+}
+
+form.reset();
+
+editingTripId = null;
+
+submitButton.innerHTML = `
+    <i class="fa-solid fa-plus"></i>
+    Add Trip
+`;
+
+ await loadTrips();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert("Unable to save trip.");
+
+    }
 
 });
 
-/* ---------------- Delete ---------------- */
+/* ---------------- Delete Trip ---------------- */
 
 async function deleteTrip(id) {
 
     if (!confirm("Delete this trip?")) return;
 
-    await fetch(`${API}/trips/${id}`, {
+    try {
 
-        method: "DELETE"
+        const response = await fetch(`${API}/trips/${id}`, {
 
-    });
-
-    loadTrips();
-
-}
-
-/* ---------------- Edit ---------------- */
-
-async function editTrip(id) {
-
-    const response = await fetch(`${API}/trips/${id}`);
-
-    const trip = await response.json();
-
-    document.getElementById("destination").value =
-        trip.destination;
-
-    document.getElementById("country").value =
-        trip.country;
-
-    document.getElementById("travelType").value =
-        trip.travel_type;
-
-    document.getElementById("budget").value =
-        trip.estimated_budget;
-
-    document.getElementById("status").value =
-        trip.status;
-
-    document.getElementById("rating").value =
-        trip.rating;
-
-    document.getElementById("notes").value =
-        trip.experience_notes;
-
-    form.onsubmit = async (e) => {
-
-        e.preventDefault();
-
-        const body = {
-
-            destination:
-                document.getElementById("destination").value,
-
-            country:
-                document.getElementById("country").value,
-
-            travel_type:
-                document.getElementById("travelType").value,
-
-            estimated_budget:
-                Number(document.getElementById("budget").value),
-
-            status:
-                document.getElementById("status").value,
-
-            rating:
-                Number(document.getElementById("rating").value),
-
-            experience_notes:
-                document.getElementById("notes").value
-
-        };
-
-        await fetch(`${API}/trips/${id}`, {
-
-            method: "PUT",
-
-            headers: {
-
-                "Content-Type": "application/json"
-
-            },
-
-            body: JSON.stringify(body)
+            method: "DELETE"
 
         });
 
-        form.reset();
+        if (!response.ok) {
 
-        form.onsubmit = null;
+    throw new Error("Delete failed");
 
-        location.reload();
+}
 
-    };
+alert("Trip deleted successfully.");
+
+await loadTrips();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert("Unable to delete trip.");
+
+    }
+
+}
+
+/* ---------------- Edit Trip ---------------- */
+
+async function editTrip(id) {
+
+    try {
+
+        const response = await fetch(`${API}/trips/${id}`);
+
+        if (!response.ok) {
+
+            throw new Error("Unable to load trip");
+
+        }
+
+        const trip = await response.json();
+
+        editingTripId = id;
+
+        document.getElementById("destination").value =
+            trip.destination;
+
+        document.getElementById("country").value =
+            trip.country;
+
+        document.getElementById("travelType").value =
+            trip.travel_type;
+
+        document.getElementById("budget").value =
+            trip.estimated_budget;
+
+        document.getElementById("status").value =
+            trip.status;
+
+        document.getElementById("rating").value =
+            trip.rating ?? "";
+
+        document.getElementById("notes").value =
+            trip.experience_notes ?? "";
+
+        submitButton.innerHTML = `
+            <i class="fa-solid fa-floppy-disk"></i>
+            Update Trip
+        `;
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert("Unable to load trip.");
+
+    }
 
 }
 
