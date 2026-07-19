@@ -1,0 +1,324 @@
+/* Google Font */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#333;
+}
+
+/* ---------------- NAVBAR ---------------- */
+
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 50px;
+
+    background:linear-gradient(90deg,#2563eb,#38bdf8);
+
+    color:white;
+
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo i{
+    font-size:32px;
+}
+
+.logo h2{
+    font-size:28px;
+}
+
+nav{
+    display:flex;
+    gap:30px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#ffe082;
+}
+
+nav .active{
+    border-bottom:3px solid white;
+    padding-bottom:5px;
+}
+
+/* ---------------- MAIN ---------------- */
+
+main{
+    width:90%;
+    margin:auto;
+    margin-top:35px;
+}
+
+/* ---------------- WELCOME ---------------- */
+
+.welcome{
+    background:white;
+    padding:30px;
+    border-radius:15px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+    margin-bottom:35px;
+}
+
+.welcome h1{
+    font-size:34px;
+    color:#2563eb;
+}
+
+.welcome p{
+    margin-top:10px;
+    color:#666;
+}
+
+/* ---------------- DASHBOARD CARDS ---------------- */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:25px;
+
+    margin-bottom:40px;
+
+}
+
+.card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.card i{
+
+    font-size:42px;
+
+    color:#2563eb;
+
+    margin-bottom:18px;
+
+}
+
+.card h3{
+
+    color:#666;
+
+    margin-bottom:15px;
+
+}
+
+.card h2{
+
+    font-size:34px;
+
+    color:#111827;
+
+}
+
+/* ---------------- CHARTS ---------------- */
+
+.chartSection{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
+
+    gap:25px;
+
+    margin-bottom:40px;
+
+}
+
+.chartCard{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+.chartCard h2{
+
+    margin-bottom:20px;
+
+    color:#2563eb;
+
+    text-align:center;
+
+}
+
+/* ---------------- TABLE ---------------- */
+
+.summaryCard{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+.summaryCard h2{
+
+    color:#2563eb;
+
+    margin-bottom:20px;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+table th{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:14px;
+
+}
+
+table td{
+
+    padding:12px;
+
+    border-bottom:1px solid #ddd;
+
+    text-align:center;
+
+}
+
+table tr:hover{
+
+    background:#f2f7ff;
+
+}
+
+/* ---------------- FOOTER ---------------- */
+
+footer{
+
+    margin-top:50px;
+
+    text-align:center;
+
+    padding:20px;
+
+    color:#666;
+
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+
+@media(max-width:900px){
+
+header{
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+nav{
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+}
+
+.chartSection{
+
+    grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:600px){
+
+main{
+
+    width:95%;
+
+}
+
+.card{
+
+    padding:20px;
+
+}
+
+.welcome h1{
+
+    font-size:26px;
+
+}
+
+.logo h2{
+
+    font-size:22px;
+
+}
+
+}

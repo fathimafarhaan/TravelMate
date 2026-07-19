@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelMate Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        <i class="fa-solid fa-earth-americas"></i>
+        <h2>TravelMate</h2>
+    </div>
+
+    <nav>
+
+        <a href="index.html" class="active">Dashboard</a>
+        <a href="trips.html">Trips</a>
+        <a href="places.html">Places</a>
+        <a href="notes.html">Notes</a>
+        <a href="expenses.html">Expenses</a>
+
+    </nav>
+
+</header>
+
+<main>
+
+    <section class="welcome">
+
+        <h1>Travel Dashboard</h1>
+
+        <p>
+            Track trips, budgets, expenses and travel experiences.
+        </p>
+
+    </section>
+
+    <section class="cards">
+
+        <div class="card">
+
+            <i class="fa-solid fa-plane"></i>
+
+            <h3>Total Trips</h3>
+
+            <h2 id="totalTrips">0</h2>
+
+        </div>
+
+        <div class="card">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <h3>Completed</h3>
+
+            <h2 id="completedTrips">0</h2>
+
+        </div>
+
+        <div class="card">
+
+            <i class="fa-solid fa-calendar"></i>
+
+            <h3>Planned</h3>
+
+            <h2 id="plannedTrips">0</h2>
+
+        </div>
+
+        <div class="card">
+
+            <i class="fa-solid fa-wallet"></i>
+
+            <h3>Total Expense</h3>
+
+            <h2 id="totalExpense">₹0</h2>
+
+        </div>
+
+    </section>
+
+    <section class="chartSection">
+
+        <div class="chartCard">
+
+            <h2>Travel Types</h2>
+
+            <canvas id="travelTypeChart"></canvas>
+
+        </div>
+
+        <div class="chartCard">
+
+            <h2>Expense Categories</h2>
+
+            <canvas id="expenseChart"></canvas>
+
+        </div>
+
+    </section>
+
+    <section class="summary">
+
+        <div class="summaryCard">
+
+            <h2>Budget vs Expense</h2>
+
+            <table id="budgetTable">
+
+                <thead>
+
+                <tr>
+
+                    <th>Destination</th>
+
+                    <th>Budget</th>
+
+                    <th>Expense</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
