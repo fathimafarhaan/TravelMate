@@ -4,16 +4,22 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>TravelMate - Notes</title>
 
     <link rel="stylesheet" href="../style.css">
+
     <link rel="stylesheet" href="../css/notes.css">
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
 
 </head>
 
@@ -32,9 +38,13 @@
     <nav>
 
         <a href="../index.html">Dashboard</a>
+
         <a href="trips.html">Trips</a>
+
         <a href="places.html">Places</a>
+
         <a href="notes.html" class="active">Notes</a>
+
         <a href="expenses.html">Expenses</a>
 
     </nav>
@@ -47,7 +57,9 @@
 
         <h1>Planning Notes</h1>
 
-        <p>Save important notes for each trip.</p>
+        <p>
+            Save important notes and reminders for each trip.
+        </p>
 
     </div>
 
@@ -55,11 +67,11 @@
 
         <h2>Add Note</h2>
 
-        <form>
+        <form id="noteForm">
 
             <div class="grid">
 
-                <select>
+                <select id="tripSelect" required>
 
                     <option selected disabled>
                         Select Trip
@@ -70,11 +82,13 @@
             </div>
 
             <textarea
+                id="noteText"
                 rows="6"
-                placeholder="Write your note here..."
+                placeholder="Write your planning note..."
+                required
             ></textarea>
 
-            <button>
+            <button type="submit">
 
                 <i class="fa-solid fa-note-sticky"></i>
 
@@ -97,6 +111,7 @@
                 <tr>
 
                     <th>Trip</th>
+
                     <th>Note</th>
                     <th>Created</th>
                     <th>Actions</th>
@@ -105,7 +120,7 @@
 
             </thead>
 
-            <tbody>
+            <tbody id="notesTable">
 
             </tbody>
 
