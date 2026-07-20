@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TravelMate - Trips</title>
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/trips.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        <i class="fa-solid fa-earth-americas"></i>
+        <span>TravelMate</span>
+    </div>
+
+    <nav>
+
+        <a href="../index.html">Dashboard</a>
+        <a href="trips.html" class="active">Trips</a>
+        <a href="places.html">Places</a>
+        <a href="notes.html">Notes</a>
+        <a href="expenses.html">Expenses</a>
+
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+    <div class="page-title">
+
+        <h1>Trips</h1>
+
+        <p>Create and manage all your trips.</p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Add New Trip</h2>
+
+        <form id="tripForm">
+
+            <div class="grid">
+
+                <input
+                    type="text"
+                    id="destination"
+                    placeholder="Destination"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="country"
+                    placeholder="Country"
+                    required
+                >
+
+                <select id="travelType">
+
+                    <option>Solo</option>
+                    <option>Friends</option>
+                    <option>Family</option>
+                    <option>Business</option>
+                    <option>Other</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    id="budget"
+                    placeholder="Estimated Budget"
+                    required
+                >
+
+                <select id="status">
+
+                    <option>Planned</option>
+                    <option>Completed</option>
+
+                </select>
+
+                <input
+                    type="number"
+                    id="rating"
+                    placeholder="Rating (1-5)"
+                    min="1"
+                    max="5"
+                >
+
+            </div>
+
+            <textarea
+                id="notes"
+                rows="4"
+                placeholder="Notes to take down for this trip..."
+            ></textarea>
+
+            <button type="submit">
+
+                <i class="fa-solid fa-plus"></i>
+
+                Add Trip
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>All Trips</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Destination</th>
+                    <th>Country</th>
+                    <th>Type</th>
+                    <th>Budget</th>
+                    <th>Status</th>
+                    <th>Rating</th>
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tripTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script src="../js/trips.js"></script>
+
+</body>
+
+</html>
