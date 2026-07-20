@@ -76,9 +76,7 @@ def get_trip_summary(trips_df):
         "completed_trips": completed,
         "planned_trips": int((trips_df["status"] == "Planned").sum()),
         "completion_rate": round(completed * 100 / total, 2),
-        "average_budget": round(
-            float(trips_df["estimated_budget"].mean()), 2
-        ),
+        "average_budget": round(float(trips_df["estimated_budget"].mean()), 2),
         "average_rating": (
             round(float(trips_df["rating"].dropna().mean()), 2)
             if trips_df["rating"].notna().any()

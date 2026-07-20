@@ -1,4 +1,5 @@
 "notes routes"
+
 from flask import Blueprint, request, jsonify
 import db
 
@@ -15,22 +16,25 @@ def create_note(trip_id):
             trip_id,
             note_text
         ) VALUES (?,?)""",
-        (trip_id,
-         data["note_text"]
-        )
+        (trip_id, data["note_text"]),
     )
-    return jsonify(
-    {
-        "id": result["lastrowid"],
-        "message": "Note created successfully",
-    }
-), 201
+    return (
+        jsonify(
+            {
+                "id": result["lastrowid"],
+                "message": "Note created successfully",
+            }
+        ),
+        201,
+    )
 
 
 @notes_bp.route("/trips/<int:trip_id>/planning_notes", methods=["GET"])
 def get_notes(trip_id):
     "function for getting all notes for a specific trip"
-    return jsonify(db.run_query("SELECT * FROM planning_notes WHERE trip_id=?", (trip_id,)))
+    return jsonify(
+        db.run_query("SELECT * FROM planning_notes WHERE trip_id=?", (trip_id,))
+    )
 
 
 @notes_bp.route("/planning_notes/<int:note_id>", methods=["PUT"])
@@ -41,14 +45,12 @@ def update_note(note_id):
         """UPDATE planning_notes SET 
             note_text=?
         WHERE id=?""",
-        (data["note_text"],
-         note_id
-        )
+        (data["note_text"], note_id),
     )
     if result["rowcount"] == 0:
-        return jsonify({"error":"Note not found"}),404
+        return jsonify({"error": "Note not found"}), 404
 
-    return jsonify({"message":"Note updated successfully"}),200
+    return jsonify({"message": "Note updated successfully"}), 200
 
 
 @notes_bp.route("/planning_notes/<int:note_id>", methods=["DELETE"])

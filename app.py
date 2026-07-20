@@ -27,9 +27,7 @@ app.register_blueprint(analytics_bp)
 @app.route("/")
 def home():
     """Home route for the TravelMate API"""
-    return {
-        "message": "TravelMate API is running"
-    }
+    return {"message": "TravelMate API is running"}
 
 
 if __name__ == "__main__":

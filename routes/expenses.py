@@ -1,4 +1,5 @@
 "expenses routes"
+
 from flask import Blueprint, request, jsonify
 import db
 
@@ -18,19 +19,24 @@ def create_expense(trip_id):
             description,
             expense_date
         ) VALUES (?,?,?,?,?)""",
-        (trip_id,
-         data["category"],
-         data["amount"],
-         data["description"],
-         data["expense_date"]
-        )
+        (
+            trip_id,
+            data["category"],
+            data["amount"],
+            data["description"],
+            data["expense_date"],
+        ),
     )
-    return jsonify(
-    {
-        "id": result["lastrowid"],
-        "message": "Expense created successfully",
-    }
-), 201
+    return (
+        jsonify(
+            {
+                "id": result["lastrowid"],
+                "message": "Expense created successfully",
+            }
+        ),
+        201,
+    )
+
 
 @expenses_bp.route("/trips/<int:trip_id>/expenses", methods=["GET"])
 def get_expenses(trip_id):
@@ -49,17 +55,18 @@ def update_expense(expense_id):
             description=?,
             expense_date=?
         WHERE id=?""",
-        (data["category"],
-         data["amount"],
-         data["description"],
-         data["expense_date"],
-         expense_id
-        )
+        (
+            data["category"],
+            data["amount"],
+            data["description"],
+            data["expense_date"],
+            expense_id,
+        ),
     )
     if result["rowcount"] == 0:
-        return jsonify({"error":"Expense not found"}),404
+        return jsonify({"error": "Expense not found"}), 404
 
-    return jsonify({"message":"Expense updated successfully"}),200
+    return jsonify({"message": "Expense updated successfully"}), 200
 
 
 @expenses_bp.route("/expenses/<int:expense_id>", methods=["DELETE"])

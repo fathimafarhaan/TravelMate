@@ -31,12 +31,15 @@ def create_trips():
             data.get("experience_notes", None),
         ),
     )
-    return jsonify(
-    {
-        "id": result["lastrowid"],
-        "message": "Trip created successfully",
-    }
-), 201
+    return (
+        jsonify(
+            {
+                "id": result["lastrowid"],
+                "message": "Trip created successfully",
+            }
+        ),
+        201,
+    )
 
 
 @trips_bp.route("/trips", methods=["GET"])
@@ -80,9 +83,9 @@ def update_trip(trip_id):
         ),
     )
     if result["rowcount"] == 0:
-        return jsonify({"error":"Trip not found"}),404
+        return jsonify({"error": "Trip not found"}), 404
 
-    return jsonify({"message":"Trip updated successfully"}),200
+    return jsonify({"message": "Trip updated successfully"}), 200
 
 
 @trips_bp.route("/trips/<int:trip_id>", methods=["DELETE"])

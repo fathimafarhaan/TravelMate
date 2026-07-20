@@ -1,3 +1,4 @@
+"""unit testing for database functions"""
 import unittest
 import sqlite3
 
@@ -5,6 +6,7 @@ import db
 
 
 class TestDatabase(unittest.TestCase):
+    """Unit tests for database functions."""
 
     def test_get_connection(self):
         """Test that a database connection is created"""
@@ -21,13 +23,11 @@ class TestDatabase(unittest.TestCase):
 
         connection = db.get_connection()
 
-        tables = connection.execute(
-            """
+        tables = connection.execute("""
             SELECT name
             FROM sqlite_master
             WHERE type='table'
-            """
-        ).fetchall()
+            """).fetchall()
 
         table_names = [table["name"] for table in tables]
 
@@ -48,10 +48,7 @@ class TestDatabase(unittest.TestCase):
     def test_run_query_one(self):
         """Test SELECT query returning one row"""
 
-        result = db.run_query_one(
-            "SELECT * FROM trips WHERE id=?",
-            (999,)
-        )
+        result = db.run_query_one("SELECT * FROM trips WHERE id=?", (999,))
 
         self.assertIsNone(result)
 
@@ -70,13 +67,7 @@ class TestDatabase(unittest.TestCase):
             )
             VALUES (?,?,?,?,?)
             """,
-            (
-                "Goa",
-                "India",
-                "Friends",
-                25000,
-                "Planned"
-            )
+            ("Goa", "India", "Friends", 25000, "Planned"),
         )
 
         self.assertIn("lastrowid", result)

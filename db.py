@@ -1,4 +1,3 @@
-
 "database logic"
 
 import sqlite3
@@ -37,11 +36,7 @@ def init_db():
 
     if DB_TYPE == "sqlite":
 
-        with open(
-            "schema.sql",
-            "r",
-            encoding="utf-8"
-        ) as f:
+        with open("schema.sql", "r", encoding="utf-8") as f:
 
             schema = f.read()
 
@@ -55,11 +50,7 @@ def init_db():
 
     else:
 
-        with open(
-            "schema_mysql.sql",
-            "r",
-            encoding="utf-8"
-        ) as f:
+        with open("schema_mysql.sql", "r", encoding="utf-8") as f:
 
             schema = f.read()
 
@@ -108,7 +99,6 @@ def run_query(query, params=()):
 
     return rows
 
-    
 
 def run_query_one(query, params=()):
     """Run a SELECT query and return one row."""
@@ -135,7 +125,6 @@ def run_query_one(query, params=()):
     conn.close()
 
     return row
-
 
 
 def run_query_no_output(query, params=()):

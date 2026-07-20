@@ -77,9 +77,7 @@ class TestPlacesAPI(unittest.TestCase):
             ),
         )
 
-        response = self.client.get(
-            f"/trips/{self.trip_id}/places_to_visit"
-        )
+        response = self.client.get(f"/trips/{self.trip_id}/places_to_visit")
 
         self.assertEqual(response.status_code, 200)
 
@@ -144,9 +142,7 @@ class TestPlacesAPI(unittest.TestCase):
 
         place_id = result["lastrowid"]
 
-        response = self.client.delete(
-            f"/places_to_visit/{place_id}"
-        )
+        response = self.client.delete(f"/places_to_visit/{place_id}")
 
         self.assertEqual(response.status_code, 200)
 
